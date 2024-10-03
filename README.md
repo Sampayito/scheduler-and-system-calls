@@ -3,7 +3,7 @@ In this assignment you will be implementing a priority scheduler, the user progr
 You must use a GitHub Codespace to develop this assignment.
 
 ## Reading
-To prepare yourself for the assignment read the following sections from the [xv6 book](documentation\book-riscv-rev3.pdf):
+To prepare yourself for the assignment read the following sections from the [xv6 book](documentation/book-riscv-rev3.pdf):
 
 - 2.2 User mode, supervisor mode, and system calls
 - 2.3 Kernel organization
