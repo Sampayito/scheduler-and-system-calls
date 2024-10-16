@@ -106,6 +106,8 @@ struct process_control_block
   int killed;           // If non-zero, have been killed
   int xstate;           // Exit status to be returned to parent's wait
   int pid;              // Process ID
+  int effective_priority;
+  int real_priority;
 
   // wait_lock must be held when using this:
   struct process_control_block *parent; // Parent process
