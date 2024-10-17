@@ -108,6 +108,7 @@ struct process_control_block
   int pid;              // Process ID
   int effective_priority;
   int real_priority;
+  int ticks;
 
   // wait_lock must be held when using this:
   struct process_control_block *parent; // Parent process
