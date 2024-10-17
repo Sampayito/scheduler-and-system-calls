@@ -106,6 +106,32 @@ uint64 sys_setPriority(void)
     if (p->pid == pid)
     {
       p->real_priority = priority;
+      release(&p->lock);
+      return 0;
+    }
+    release(&p->lock);
+  }
+  return -1;
+}
+
+uint64 sys_setEffectivePriority(void)
+{
+  int pid;
+  int priority;
+  argint(0, &pid);
+  argint(1, &priority);
+
+  if (priority < -20 || priority > 20)
+  {
+    return -1;
+  }
+
+  struct process_control_block *p;
+  for (p = process_table; p < &process_table[NPROC]; p++)
+  {
+    acquire(&p->lock);
+    if (p->pid == pid)
+    {
       p->effective_priority = priority;
       release(&p->lock);
       return 0;
@@ -114,3 +140,4 @@ uint64 sys_setPriority(void)
   }
   return -1;
 }
+

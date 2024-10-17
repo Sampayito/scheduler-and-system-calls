@@ -122,6 +122,8 @@ static struct process_control_block* allocproc(void)
 found:
   p->pid = allocpid();
   p->state = USED;
+  p->effective_priority = 0; //initializig priorities when a process is created with default of 0
+  p->real_priority = 0;
 
   // Allocate a trapframe page.
   if((p->trapframe = (struct trapframe *)kalloc()) == 0)
