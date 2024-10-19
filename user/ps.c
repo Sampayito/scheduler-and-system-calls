@@ -23,22 +23,22 @@ int main (int argc, char *argv[])
             switch(ps.state[i])
             {
                 case USED:
-                    printf("USED\t\t\t");
+                    printf("USED\t\t");
                     break;
                 case UNUSED:
-                    printf("UNUSED\t\t\t");
+                    printf("UNUSED\t\t");
                     break;
                 case SLEEPING:
-                    printf("SLEEPING\t\t");
+                    printf("SLEEPING\t");
                     break;
                 case RUNNABLE:
-                    printf("RUNNABLE\t\t");
+                    printf("RUNNABLE\t");
                     break;
                 case RUNNING:
-                    printf("RUNNING\t\t\t");
+                    printf("RUNNING\t\t");
                     break;
                 case ZOMBIE:
-                    printf("ZOMBIE\t\t\t");
+                    printf("ZOMBIE\t\t");
                     break;
             }
 
