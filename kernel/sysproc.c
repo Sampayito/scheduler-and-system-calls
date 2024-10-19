@@ -143,7 +143,7 @@ uint64 sys_setEffectivePriority(void)
 
 uint64 sys_getpinfo(void)
 {
-  uint64 dst;
+  uint64 dst; //user space ptr to pstat struct
   argaddr(0, &dst);
 
   struct process_control_block *p;
@@ -153,19 +153,21 @@ uint64 sys_getpinfo(void)
   for (p = process_table; p < &process_table[NPROC]; p++)
   {
     acquire(&p->lock);
-
-    copied_pstat.state[i] = p->state;
-    //should i check inuse before all this?
-    copied_pstat.effective_priority[i] = p->effective_priority;
-    copied_pstat.real_priority[i] = p->real_priority;
-    copied_pstat.pid[i] = p->pid;
-    copied_pstat.ticks[i] = p->ticks;
-
+    if ((copied_pstat.inuse[i] = (p->state != UNUSED)))
+    {
+      strncpy(copied_pstat.name[i], p->name, 16);
+      copied_pstat.state[i] = p->state;
+      copied_pstat.effective_priority[i] = p->effective_priority;
+      copied_pstat.real_priority[i] = p->real_priority;
+      copied_pstat.pid[i] = p->pid;
+      copied_pstat.ticks[i] = p->ticks;
+    }
     release(&p->lock);
     i++;
   }
 
-  //copyout
+  either_copyout(1, dst, &copied_pstat, sizeof(copied_pstat)); //from kernel to user space
+  //1st parameter is 1 which means dst is a user virtual address (in user space)
 
   return 0;
 }

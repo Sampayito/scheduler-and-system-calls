@@ -1,3 +1,4 @@
+#include "pstat.h"
 struct stat;
 
 // system calls
@@ -22,6 +23,9 @@ int getpid(void);
 char* sbrk(int);
 int sleep(int);
 int uptime(void);
+int setPriority(int pid, int priority);
+int setEffectivePriority(int pid, int priority);
+int getpinfo(struct pstat*);
 
 // ulib.c
 int stat(const char*, struct stat*);
