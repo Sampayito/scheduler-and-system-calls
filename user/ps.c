@@ -43,6 +43,8 @@ int main (int argc, char *argv[])
             }
 
             printf("%d\n", ps.effective_priority[i]);
+            //printf("%d\n", ps.real_priority[i]); used to test setPriority
+            //uncomment the set functions in sh.c to test
         }
     }
     return 0;

@@ -147,6 +147,11 @@ main(void)
 {
   static char buf[100];
   int fd;
+  //uncomment to test other functions created
+  //setPriority(1, 19);
+  //setPriority(2, 1);
+  //setEffectivePriority(1, 12);
+  //setEffectivePriority(2, -11);
 
   // Ensure that three file descriptors are open.
   while((fd = open("console", O_RDWR)) >= 0){
